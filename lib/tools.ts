@@ -411,6 +411,10 @@ export const TOOLS: Tool[] = [
         a: "Yes. Both legacy comma-separated syntax like rgb(255, 0, 0) and modern CSS Color 4 space-separated syntax like rgb(255 0 0 / 0.5) and hsl(200 100% 50% / 0.8) are supported.",
       },
       {
+        q: "Can I enter CSS color names or HEX without a #?",
+        a: "Yes. The converter accepts all standard CSS named colors, including rebeccapurple and transparent, as well as 3-, 4-, 6-, or 8-digit HEX values without the # prefix.",
+      },
+      {
         q: "Is any color data sent to a server?",
         a: "No. All conversions, swatch rendering, and contrast calculations run entirely in your browser using client-side JavaScript. No data ever leaves your device.",
       },

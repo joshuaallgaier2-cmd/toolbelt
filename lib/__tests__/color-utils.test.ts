@@ -72,6 +72,30 @@ describe("HEX parsing", () => {
       value: { r: 255, g: 0, b: 0, a: 128 / 255 },
     });
   });
+
+  it("parses HEX values without a # prefix", () => {
+    expect(parseColor("F26DF0")).toEqual(parseColor("#F26DF0"));
+    expect(parseColor("f26df0")).toEqual(parseColor("#f26df0"));
+    expect(parseColor("fff")).toEqual(parseColor("#fff"));
+    expect(parseColor("ff000080")).toEqual(parseColor("#ff000080"));
+  });
+});
+
+describe("CSS named colors", () => {
+  it("parses standard names case-insensitively and supports transparent", () => {
+    expect(parseColor("rebeccapurple")).toEqual({
+      ok: true,
+      value: { r: 102, g: 51, b: 153, a: 1 },
+    });
+    expect(parseColor("RED")).toEqual({
+      ok: true,
+      value: { r: 255, g: 0, b: 0, a: 1 },
+    });
+    expect(parseColor("transparent")).toEqual({
+      ok: true,
+      value: { r: 0, g: 0, b: 0, a: 0 },
+    });
+  });
 });
 
 describe("RGB / RGBA and HSL / HSLA syntax varieties", () => {
@@ -183,10 +207,10 @@ describe("invalid input handling", () => {
     "",
     "   ",
     "not-a-color",
-    "red",
-    "transparent",
-    "blue",
+    "notacolor",
     "#12345",
+    "ff00f",
+    "currentcolor",
     "#gggggg",
     "rgb(255, 0)",
     "rgb(255, 0, 0, 0, 0)",
